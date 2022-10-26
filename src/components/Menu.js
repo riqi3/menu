@@ -1,61 +1,53 @@
 import React from "react";
-import { IconContext } from "react-icons";
-import { FiPlus, FiMinus } from "react-icons/fi";
 import { useState } from "react";
-import { Data, All, Breakfast, Lunch, Shakes } from "./Data";
+import { Data } from "./Data";
 
 const Menu = () => {
-    const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(1);
 
-    const toggle = (index) => {
-        if (clicked === index) {
-            return setClicked(null);
-        }
-        setClicked(index);
-    };
+  const toggle = (index) => {
+    setClicked(index);
+  };
 
-    return (
-        <>
+  return (
+    <>
+      <div className="App">
+        <h1>Our Menu</h1>
 
-            return (
-            <div className="App">
-                <h1>Our Menu</h1>
-                <div class="menu-container">
-                    {Data.map((item, index) => {
-                        return (
-                            <>
-                                <div class="wrap" onClick={() => toggle(index)} key={index}>
-                                    <div class="menu-container">
-                                        <ul>
-                                            <li class="menu-tab">
-                                                <div ><button>All</button></div>
-                                                {/* {clicked === index ? (
-                                                    <div class="dropdown">
-                                                        {item.All}
-                                                    </div>
-                                                ) : null} */}
-                                            </li>
-                                            <li class="menu-tab">
-                                                <div ><button>Break</button></div>
-                                            </li>
-                                            <li class="menu-tab">
-                                                <div ><button>Lunch</button></div>
-                                            </li>
-                                            <li class="menu-tab">
-                                                <div ><button>Shakes</button></div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </>
-                        );
-                    })}
-
-                </div>
-            </div>
-            );
-        </>
-    );
+        {Data.map((item, index) => {
+          return (
+            <>
+              <div
+                class="menu-container"
+                onClick={() => toggle(index)}
+                key={index}
+              >
+                <ul>
+                  <li class="menu-tab">
+                    <button >{clicked === index}All</button>
+                  </li>
+                  <li class="menu-tab">
+                    <button>{clicked === index}Breakfast</button>
+                  </li>
+                  <li class="menu-tab">
+                    <button>{clicked === index}Lunch</button>
+                  </li>
+                  <li class="menu-tab">
+                    <button>{clicked === index}Shakes</button>
+                  </li>
+                </ul>
+              </div>
+              {clicked === index ? (
+                        <div class="dropdown">
+                          <p>{item.price}</p>
+                        </div>
+                      ) : null}
+            </>
+          );
+        })}
+      </div>
+    </>
+  );
 };
 
 export default Menu;
