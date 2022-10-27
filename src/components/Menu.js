@@ -1,53 +1,28 @@
 import React from "react";
-import { useState } from "react";
-import { Data } from "./Data";
 
-const Menu = () => {
-  const [clicked, setClicked] = useState(1);
-
-  const toggle = (index) => {
-    setClicked(index);
-  };
-
-  return (
-    <>
-      <div className="App">
-        <h1>Our Menu</h1>
-
-        {Data.map((item, index) => {
-          return (
-            <>
-              <div
-                class="menu-container"
-                onClick={() => toggle(index)}
-                key={index}
-              >
-                <ul>
-                  <li class="menu-tab">
-                    <button >{clicked === index}All</button>
-                  </li>
-                  <li class="menu-tab">
-                    <button>{clicked === index}Breakfast</button>
-                  </li>
-                  <li class="menu-tab">
-                    <button>{clicked === index}Lunch</button>
-                  </li>
-                  <li class="menu-tab">
-                    <button>{clicked === index}Shakes</button>
-                  </li>
-                </ul>
-              </div>
-              {clicked === index ? (
-                        <div class="dropdown">
-                          <p>{item.price}</p>
-                        </div>
-                      ) : null}
-            </>
-          );
+const Menu = ({ data }) => {
+  return(
+    <div className="section-center">
+        {data.map((item) => {
+            const {id, menuItem, price, description, image} = item;
+            return (
+                <article key={id} className='menu-item'>
+                    <img src={image} alt={menuItem} className='photo' />
+                    <div className='info'>
+                        <header>
+                            <h4 className='menu-title'>{menuItem}</h4>
+                            <h4 className='price'>{price}</h4>
+                      
+                        </header>
+                        <hr />
+                        <p className='description'>{description}</p>
+                    </div>
+                </article>
+            );
         })}
-      </div>
-    </>
-  );
+    </div>
+  )
+
 };
 
 export default Menu;
